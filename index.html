@@ -709,15 +709,14 @@ footer{
 /* ── WHATSAPP FLOAT ── */
 .wa-float{
   position:fixed;bottom:28px;left:28px;z-index:999;
-  width:56px;height:56px;background:#25D366;border-radius:50%;
+  width:52px;height:52px;background:#25D366;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 4px 22px rgba(37,211,102,.5);text-decoration:none;
   animation:wap 2.5s ease infinite;transition:all .3s;
-  flex-direction:column;
 }
 .wa-float svg{width:30px;height:30px;fill:#fff;display:block;}
 @keyframes wap{0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.44)}50%{box-shadow:0 4px 40px rgba(37,211,102,.72)}}
-.wa-float:hover{background:#1fad57;transform:scale(1.1);animation:none;}
+.wa-float:hover{background:#1fad57;transform:scale(1.08);animation:none;}
 
 /* ── RESPONSIVE ── */
 
@@ -1123,17 +1122,23 @@ footer{
 /* Contact Us float button */
 .contact-float{
   position:fixed;bottom:28px;right:28px;z-index:999;
-  display:flex;align-items:center;gap:0;
-  cursor:pointer;
+  display:flex;align-items:center;
 }
 .contact-float-btn{
-  width:56px;height:56px;
+  height:52px;
+  padding:0 20px;
   background:var(--M);
-  border-radius:50%;
+  border-radius:26px;
   display:flex;align-items:center;justify-content:center;
   box-shadow:0 4px 22px rgba(90,15,28,.45);
   text-decoration:none;
-  color:#fff;
+  color:var(--GB);
+  font-family:'Outfit',sans-serif;
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  white-space:nowrap;
   animation:wap 2.5s ease infinite;
   transition:all .3s;
   position:relative;
@@ -1144,67 +1149,94 @@ footer{
   background:var(--G);
 }
 /* Label that slides out on hover */
-.contact-float-label{
-  position:absolute;right:68px;
-  background:var(--M);
-  color:var(--GB);
-  font-family:'Outfit',sans-serif;
-  font-size:12px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:8px 16px;
-  border-radius:4px;
-  white-space:nowrap;
-  opacity:0;
-  transform:translateX(10px);
-  transition:all .3s;
-  pointer-events:none;
-  box-shadow:0 4px 16px rgba(90,15,28,.3);
-}
-.contact-float-label::after{
-  content:'';
-  position:absolute;right:-6px;top:50%;transform:translateY(-50%);
-  width:0;height:0;
-  border-top:6px solid transparent;
-  border-bottom:6px solid transparent;
-  border-left:6px solid var(--M);
-}
-.contact-float:hover .contact-float-label{
-  opacity:1;
-  transform:translateX(0);
-}
+.contact-float-label{ display:none; }
 /* WA label too */
-.wa-label{
-  position:absolute;left:68px;
-  background:#25D366;
-  color:#fff;
-  font-family:'Outfit',sans-serif;
-  font-size:12px;font-weight:600;
-  letter-spacing:.1em;text-transform:uppercase;
-  padding:8px 16px;
-  border-radius:4px;
-  white-space:nowrap;
-  opacity:0;
-  transform:translateX(-10px);
-  transition:all .3s;
-  pointer-events:none;
-  box-shadow:0 4px 16px rgba(37,211,102,.3);
-}
-.wa-label::before{
-  content:'';
-  position:absolute;left:-6px;top:50%;transform:translateY(-50%);
-  width:0;height:0;
-  border-top:6px solid transparent;
-  border-bottom:6px solid transparent;
-  border-right:6px solid #25D366;
-}
-.wa-float:hover .wa-label{
-  opacity:1;
-  transform:translateX(0);
-}
+.wa-label{ display:none; }
 @media(max-width:600px){
   .contact-float-label,.wa-label{display:none;}
-  .contact-float-btn{width:50px;height:50px;}
+  .contact-float-btn{height:44px!important;padding:0 14px!important;border-radius:22px!important;font-size:11px!important;}
   .contact-float{bottom:20px;right:20px;}
+  .wa-float{width:46px!important;height:46px!important;left:20px;bottom:20px;}
+}
+
+/* ── TESTIMONIALS SLIDER ── */
+.tc-wrapper{
+  position:relative;
+  overflow:hidden;          /* hides off-screen cards */
+  padding:0 0 8px;
+  margin:0 -4px;
+}
+.tc-track{
+  display:flex;
+  gap:20px;
+  transition:transform .5s cubic-bezier(.4,0,.2,1);
+  will-change:transform;
+  padding:8px 4px 12px;
+}
+.tc-card{
+  flex:0 0 calc(33.333% - 14px);
+  background:#fff;
+  border-radius:12px;
+  padding:24px;
+  box-shadow:0 2px 16px rgba(0,0,0,.07);
+  border:1px solid rgba(0,0,0,.06);
+  box-sizing:border-box;
+}
+.tc-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  margin-bottom:14px;
+  gap:8px;
+}
+.tc-text{
+  font-family:'Outfit',sans-serif;
+  font-size:13.5px;color:#444;
+  line-height:1.75;font-weight:300;margin:0;
+}
+/* Arrows — OUTSIDE the overflow:hidden wrapper */
+.tc-arrow{
+  position:absolute;
+  top:50%;transform:translateY(-50%);
+  width:42px;height:42px;
+  border-radius:50%;
+  border:1.5px solid rgba(184,144,46,.4);
+  background:#fff;
+  font-size:22px;font-weight:300;
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 2px 12px rgba(0,0,0,.1);
+  transition:all .2s;
+  z-index:10;
+  color:#333;
+  line-height:1;
+}
+.tc-arrow:hover{background:#B8902E;color:#fff;border-color:#B8902E;}
+.tc-prev{left:-20px;}
+.tc-next{right:-20px;}
+.tc-dots{
+  display:flex;justify-content:center;gap:8px;margin-top:20px;
+}
+.tc-dot{
+  height:6px;border-radius:3px;
+  background:rgba(184,144,46,.3);
+  transition:all .3s;cursor:pointer;border:none;
+  width:8px;
+}
+.tc-dot.active{width:24px;background:#B8902E;}
+/* Mobile */
+@media(max-width:900px){
+  .tc-card{flex:0 0 calc(50% - 10px);}
+  .tc-prev{left:-14px;}
+  .tc-next{right:-14px;}
+}
+@media(max-width:580px){
+  .tc-card{flex:0 0 calc(100% - 0px);}
+  .tc-wrapper{margin:0;}
+  .tc-prev{left:-16px;}
+  .tc-next{right:-16px;}
+  section[style*="background:#F7F3ED"]{padding:56px 0 48px!important;}
+  section[style*="background:#F7F3ED"] > div{padding:0 28px!important;}
 }
 </style>
 </head>
@@ -1213,7 +1245,7 @@ footer{
 <!-- TOPBAR -->
 <div class="topbar">
   <div class="tb-left">
-    <a href="https://wa.me/917790090073">📞 +91-7790090073 </a>
+    <a href="https://wa.me/917790090073">📞 +91-7790090073 (WA)</a>
     <a href="tel:+917790090072" class="tb-hide-mobile">📞 +91-7790090072</a>
     <a href="tel:+917790090067" class="tb-hide-mobile">📞 +91-7790090067</a>
     <a href="tel:01145062755" class="tb-hide-mobile">☎ 011-45062755</a>
@@ -1511,229 +1543,160 @@ footer{
   </div>
 </section>
 
+
 <!-- TESTIMONIALS -->
-<section style="background:#F7F3ED;padding:80px 48px;">
-  <div style="max-width:1200px;margin:0 auto;">
+<section style="background:#F7F3ED;padding:72px 0 64px;">
+  <div style="max-width:1200px;margin:0 auto;padding:0 48px;">
 
     <!-- Header -->
-    <div style="text-align:center;margin-bottom:52px;">
+    <div style="text-align:center;margin-bottom:48px;">
       <div style="font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:.5em;text-transform:uppercase;color:#B8902E;margin-bottom:10px;font-weight:500;display:flex;align-items:center;justify-content:center;gap:12px;"><span style="width:28px;height:1px;background:#B8902E;display:block;"></span>Client Stories<span style="width:28px;height:1px;background:#B8902E;display:block;"></span></div>
       <h2 style="font-family:'DM Serif Display',serif;font-size:clamp(34px,4.5vw,52px);color:#1A0508;font-weight:400;margin:0;">Our <em style="color:#B8902E;font-style:italic;">Testimonials</em></h2>
-      <div style="width:60px;height:2px;background:#B8902E;margin:16px auto 0;opacity:.6;"></div>
+      <div style="width:56px;height:2px;background:#B8902E;margin:14px auto 0;opacity:.6;"></div>
     </div>
 
-    <!-- Scroll container -->
-    <div style="position:relative;">
-
-      <!-- Left arrow -->
-      <button onclick="scrollTestimonials(-1)" style="position:absolute;left:-20px;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid rgba(184,144,46,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.1);transition:all .2s;" onmouseover="this.style.background='#B8902E';this.style.color='#fff'" onmouseout="this.style.background='#fff';this.style.color='#333'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
-
-      <!-- Cards track -->
-      <div id="testi-track" style="display:flex;gap:16px;overflow:hidden;scroll-behavior:smooth;padding:8px 2px;width:100%;">
-
-        <!-- Card 1: Nitesh Kumar -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#E8E0D5;display:flex;align-items:center;justify-content:center;overflow:hidden;">
-                <svg viewBox="0 0 40 40" width="44" height="44"><circle cx="20" cy="20" r="20" fill="#C4956A"/><circle cx="20" cy="16" r="7" fill="#F5E6D0"/><path d="M6 36c0-8 28-8 28 0" fill="#F5E6D0"/></svg>
-              </div>
+    <!-- Slider wrapper -->
+    <div class="tc-wrapper">
+      <!-- Track -->
+      <div class="tc-track" id="tc-track">
+        
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#C4956A;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">N</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Nitesh Kumar</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Nitesh Kumar</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <!-- Google G logo -->
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">It was great. The place has big underground parking along with valet parking. There are multiple halls there which I didn't know earlier. There were screens at multiple places which were displaying what event was going on in which conference hall.</p>
+          <p class="tc-text">It was great. The place has big underground parking along with valet parking. There are multiple halls there which I didn't know earlier. There were screens at multiple places which were displaying what event was going on in which conference hall.</p>
         </div>
 
-        <!-- Card 2: Preet Shergill -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#4CAF50;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">P</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#4CAF50;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">P</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Preet Shergill</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Preet Shergill</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">Best experience, best decorations, awesome food with lots of variety, light on pocket and overall management was so good that during this unpredicted time of Covid, our function was conducted so well.</p>
+          <p class="tc-text">Best experience, best decorations, awesome food with lots of variety, light on pocket and overall management was so good that during this unpredicted time of Covid, our function was conducted so well.</p>
         </div>
 
-        <!-- Card 3: Vikrant Saxena -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#2196F3;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">V</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#2196F3;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">V</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Vikrant Saxena</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Vikrant Saxena</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">It was a pleasure choosing your banquet as our service partner for conducting an event. The ambience was great, food and service was good. Thank you for helping us make our event such a success. Special thanks to OKas Grand team!</p>
+          <p class="tc-text">It was a pleasure choosing your banquet as our service partner for conducting an event. The ambience was great, food and service was good. Thank you for helping us make our event such a success!</p>
         </div>
 
-        <!-- Card 4: Rouble Jain -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#9C27B0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">R</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#9C27B0;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">R</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Rouble Jain</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Rouble Jain</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">The place is super beautiful and well equipped to host an amazing event. The staff is courteous and very professional. The food is to die for — always opt for the diamond package. Try it, you won't be disappointed.</p>
+          <p class="tc-text">The place is super beautiful and well equipped to host an amazing event. The staff is courteous and very professional. The food is to die for — always opt for the diamond package. Try it, you won't be disappointed.</p>
         </div>
 
-        <!-- Card 5: Tarun Arya -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#FF5722;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">T</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#FF5722;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">T</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Tarun Arya</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Tarun Arya</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">We have had at least 10 functions in OKas Grand Banquet. All of them have been exceptional. Great service, awesome decor, very tasty food. Ample parking, valet parking available. The management is too good and very cooperative.</p>
+          <p class="tc-text">We have had at least 10 functions in OKas Grand. All of them have been exceptional. Great service, awesome decor, very tasty food. Ample parking, valet parking available. The management is very cooperative.</p>
         </div>
 
-
-        <!-- Card 6: Ankit Singla -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#00BCD4;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">A</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#00BCD4;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">A</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Ankit Singla</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Ankit Singla</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">We had our Roka and Ring Ceremony here. Great services — banquet, food quality, décor — all at manageable cost. The team is very professional and extended support for DJ timings and extra usage. Highly recommended!</p>
+          <p class="tc-text">We had our Roka and Ring Ceremony here. Great services — banquet, food quality, décor — all at manageable cost. The team is very professional and extended support for DJ timings. Highly recommended!</p>
         </div>
 
-        <!-- Card 7: Geeta Rao -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#E91E63;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">G</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#E91E63;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">G</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Geeta Rao</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Geeta Rao</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">Beautiful decorations and good food. Very helpful and dedicated staff — everyone was perfect. Fully satisfied with the arrangements and hospitality. Will definitely choose OKas Grand again for our next function!</p>
+          <p class="tc-text">Beautiful decorations and good food. Very helpful and dedicated staff — everyone was perfect. Fully satisfied with the arrangements and hospitality. Will definitely choose OKas Grand again for our next function!</p>
         </div>
 
-        <!-- Card 8: Rohit Joshi -->
-        <div style="min-width:calc(33.333% - 11px);max-width:calc(33.333% - 11px);background:#fff;border-radius:12px;padding:24px;box-shadow:0 2px 16px rgba(0,0,0,.07);flex-shrink:0;border:1px solid rgba(0,0,0,.06);">
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-            <div style="display:flex;align-items:center;gap:10px;">
-              <div style="width:44px;height:44px;border-radius:50%;background:#795548;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:18px;color:#fff;font-weight:400;">R</div>
+        <div class="tc-card">
+          <div class="tc-header">
+            <div style="display:flex;align-items:center;gap:12px;">
+              <div style="width:48px;height:48px;border-radius:50%;background:#795548;display:flex;align-items:center;justify-content:center;font-family:'DM Serif Display',serif;font-size:20px;color:#fff;font-weight:400;flex-shrink:0;">R</div>
               <div>
-                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#1A0508;">Rohit Joshi</div>
-                <div style="color:#F5A623;font-size:15px;letter-spacing:1px;">★★★★★</div>
+                <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#1A0508;">Rohit Joshi</div>
+                <div style="color:#F5A623;font-size:16px;letter-spacing:1px;line-height:1.2;">★★★★★</div>
               </div>
             </div>
-            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+            <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-size:13.5px;color:#444;line-height:1.75;font-weight:300;margin:0;">Attended a birthday party here — great experience. Located conveniently, separate entry, no mall queue, valet available. Food from starters to main course was excellent. Neat ambience and quick staff. Highly recommended!</p>
+          <p class="tc-text">Attended a birthday party here — great experience. Separate entry, no mall queue, valet available. Food from starters to main course was excellent. Neat ambience and quick staff. Highly recommended!</p>
         </div>
 
-      </div><!-- end track -->
+      </div>
 
-      <!-- Right arrow -->
-      <button onclick="scrollTestimonials(1)" style="position:absolute;right:-20px;top:50%;transform:translateY(-50%);z-index:10;width:44px;height:44px;border-radius:50%;background:#fff;border:1.5px solid rgba(184,144,46,.4);cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 12px rgba(0,0,0,.1);transition:all .2s;" onmouseover="this.style.background='#B8902E';this.style.color='#fff'" onmouseout="this.style.background='#fff';this.style.color='#333'">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-
+      <!-- Arrows OUTSIDE the track, at wrapper level -->
+      <button class="tc-arrow tc-prev" id="tc-prev" onclick="tcScroll(-1)" aria-label="Previous">&#8249;</button>
+      <button class="tc-arrow tc-next" id="tc-next" onclick="tcScroll(1)" aria-label="Next">&#8250;</button>
     </div>
 
     <!-- Dots -->
-    <div id="testi-dots" style="display:flex;justify-content:center;gap:8px;margin-top:24px;">
-      <div class="tdot active" style="width:24px;height:6px;border-radius:3px;background:#B8902E;transition:all .3s;cursor:pointer;" onclick="goToSlide(0)"></div>
-      <div class="tdot" style="width:8px;height:6px;border-radius:3px;background:rgba(184,144,46,.3);transition:all .3s;cursor:pointer;" onclick="goToSlide(1)"></div>
-      <div class="tdot" style="width:8px;height:6px;border-radius:3px;background:rgba(184,144,46,.3);transition:all .3s;cursor:pointer;" onclick="goToSlide(2)"></div>
-    </div>
+    <div class="tc-dots" id="tc-dots"></div>
 
-    <!-- Google rating summary -->
-    <div style="text-align:center;margin-top:32px;padding-top:24px;border-top:1px solid rgba(184,144,46,.2);">
-      <div style="display:inline-flex;align-items:center;gap:12px;background:#fff;padding:14px 28px;border-radius:8px;box-shadow:0 2px 12px rgba(0,0,0,.08);">
-        <svg width="28" height="28" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        <div style="font-family:'DM Serif Display',serif;font-size:28px;color:#1A0508;font-weight:400;line-height:1;">4.0</div>
-        <div style="text-align:left;">
-          <div style="color:#F5A623;font-size:16px;letter-spacing:2px;">★★★★☆</div>
-          <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;font-weight:300;">601 Google Reviews</div>
+    <!-- Google rating -->
+    <div style="text-align:center;margin-top:36px;padding-top:24px;border-top:1px solid rgba(184,144,46,.2);">
+      <div style="display:inline-flex;align-items:center;gap:14px;background:#fff;padding:14px 28px;border-radius:10px;box-shadow:0 2px 14px rgba(0,0,0,.07);flex-wrap:wrap;justify-content:center;">
+        <svg width="22" height="22" viewBox="0 0 24 24" flex-shrink="0"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <div style="font-family:'DM Serif Display',serif;font-size:30px;color:#1A0508;font-weight:400;line-height:1;">4.0</div>
+        <div>
+          <div style="color:#F5A623;font-size:18px;letter-spacing:2px;">★★★★☆</div>
+          <div style="font-family:'Outfit',sans-serif;font-size:12px;color:#888;font-weight:300;margin-top:2px;">601 Google Reviews</div>
         </div>
-        <a href="https://maps.app.goo.gl/wkimJWNaQudiuP298" target="_blank" style="font-family:'Outfit',sans-serif;font-size:11px;color:#4285F4;text-decoration:none;font-weight:500;letter-spacing:.05em;border:1px solid #4285F4;padding:6px 14px;border-radius:4px;margin-left:8px;">View on Google</a>
+        <a href="https://maps.app.goo.gl/wkimJWNaQudiuP298" target="_blank" style="font-family:'Outfit',sans-serif;font-size:12px;color:#4285F4;text-decoration:none;font-weight:500;border:1.5px solid #4285F4;padding:7px 16px;border-radius:6px;white-space:nowrap;">View on Google</a>
       </div>
     </div>
 
   </div>
 </section>
-
-<script>
-(function(){
-  const track = document.getElementById('testi-track');
-  const dots = document.querySelectorAll('.tdot');
-  let current = 0;
-  const total = Math.ceil(8/3); // 8 cards, 3 per page = 3 pages
-
-  function getCardWidth(){
-    const card = track.children[0];
-    return card ? card.offsetWidth + 20 : 0; // width + gap
-  }
-
-  window.scrollTestimonials = function(dir){
-    current = Math.max(0, Math.min(total - 1, current + dir));
-    track.scrollLeft = current * getCardWidth() * 3;
-    updateDots();
-  };
-
-  window.goToSlide = function(idx){
-    current = idx;
-    track.scrollLeft = current * getCardWidth() * 3;
-    updateDots();
-  };
-
-  function updateDots(){
-    dots.forEach((d, i) => {
-      if(i === current){
-        d.style.width = '24px';
-        d.style.background = '#B8902E';
-      } else {
-        d.style.width = '8px';
-        d.style.background = 'rgba(184,144,46,.3)';
-      }
-    });
-  }
-
-  // Touch/swipe support
-  let startX = 0;
-  track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', e => {
-    const diff = startX - e.changedTouches[0].clientX;
-    if(Math.abs(diff) > 50) scrollTestimonials(diff > 0 ? 1 : -1);
-  }, {passive:true});
-})();
-</script>
 
 
 <!-- CONTACT -->
@@ -1798,19 +1761,6 @@ Okhla Industrial Estate, New Delhi – 110020</div></div>
           title="OKas Grand Location"></iframe>
         <div style="position:absolute;top:0;left:0;width:20px;height:20px;border-top:2px solid #B8902E;border-left:2px solid #B8902E;pointer-events:none;z-index:2;"></div>
         <div style="position:absolute;top:0;right:0;width:20px;height:20px;border-top:2px solid #B8902E;border-right:2px solid #B8902E;pointer-events:none;z-index:2;"></div>
-        <div style="position:absolute;bottom:0;left:0;width:20px;height:20px;border-bottom:2px solid #B8902E;border-left:2px solid #B8902E;pointer-events:none;z-index:2;"></div>
-        <div style="position:absolute;bottom:0;right:0;width:20px;height:20px;border-bottom:2px solid #B8902E;border-right:2px solid #B8902E;pointer-events:none;z-index:2;"></div>
-      </div>
-
-      <!-- RIGHT: Contact info -->
-      <div style="display:flex;flex-direction:column;gap:0;">
-        <div style="background:rgba(255,255,255,.04);border:1px solid rgba(184,144,46,.2);padding:32px;flex:1;">
-
-          <!-- Address row -->
-          <div style="display:flex;gap:14px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(184,144,46,.12);">
-            <div style="width:38px;height:38px;background:#5A0F1C;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px;">📍</div>
-            <div>
-              <strong style="display:block;font-family:'Outfit',sans-serif;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#B8902E;margin-bottom:6px;font-weight:600;">Address</strong>
               <span style="font-family:'Outfit',sans-serif;font-size:14px;color:rgba(255,255,255,.72);line-height:1.8;font-weight:300;">
                 D-193, Pocket D, Okhla Phase I,<br>
                 Okhla Industrial Estate,<br>
@@ -1973,12 +1923,91 @@ document.addEventListener('keydown', e => { if(e.key==='Escape') closeMenu(); })
 <!-- CONTACT US FLOAT -->
 <div class="contact-float">
   <span class="contact-float-label">Contact Us</span>
-  <a href="#contact" class="contact-float-btn" title="Contact Us">
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:26px;height:26px;display:block;">
-  <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-</svg>
-  </a>
+  <a href="#contact" class="contact-float-btn" title="Contact Us">Contact Us</a>
 </div>
+
+<script>
+(function(){
+  var track   = document.getElementById('tc-track');
+  var dotsEl  = document.getElementById('tc-dots');
+  if(!track) return;
+
+  var cards     = track.querySelectorAll('.tc-card');
+  var total     = cards.length;
+  var current   = 0;
+  var autoTimer = null;
+
+  function getPerPage(){
+    var w = window.innerWidth;
+    if(w <= 580) return 1;
+    if(w <= 900) return 2;
+    return 3;
+  }
+
+  function totalPages(){
+    /* Cap at max 5 dots regardless of cards count */
+    return Math.min(Math.ceil(total / getPerPage()), 5);
+  }
+
+  function buildDots(){
+    dotsEl.innerHTML = '';
+    var pages = totalPages();
+    for(var i = 0; i < pages; i++){
+      var d = document.createElement('button');
+      d.className = 'tc-dot' + (i === current ? ' active' : '');
+      d.setAttribute('aria-label', 'Go to page ' + (i + 1));
+      (function(idx){ d.addEventListener('click', function(){ goTo(idx); resetAuto(); }); })(i);
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function updateDots(){
+    var ds = dotsEl.querySelectorAll('.tc-dot');
+    var pages = totalPages();
+    var activeDot = current % pages;
+    ds.forEach(function(d, i){ d.classList.toggle('active', i === activeDot); });
+  }
+
+  function goTo(idx){
+    var pages = totalPages();
+    current = ((idx % pages) + pages) % pages;
+    var pp = getPerPage();
+    var cardW = cards[0] ? (cards[0].offsetWidth + 20) : 0;
+    track.style.transform = 'translateX(-' + (current * pp * cardW) + 'px)';
+    updateDots();
+  }
+
+  window.tcScroll = function(dir){
+    goTo(current + dir);
+    resetAuto();
+  };
+
+  function startAuto(){
+    autoTimer = setInterval(function(){ goTo(current + 1); }, 4000);
+  }
+  function resetAuto(){
+    clearInterval(autoTimer);
+    startAuto();
+  }
+
+  /* Touch swipe */
+  var startX = 0;
+  track.addEventListener('touchstart', function(e){ startX = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', function(e){
+    var diff = startX - e.changedTouches[0].clientX;
+    if(Math.abs(diff) > 40){ tcScroll(diff > 0 ? 1 : -1); }
+  }, {passive:true});
+
+  /* Init */
+  buildDots();
+  startAuto();
+
+  window.addEventListener('resize', function(){
+    buildDots();
+    goTo(current);
+  });
+})();
+</script>
 
 </body>
 </html>
